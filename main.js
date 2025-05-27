@@ -20,7 +20,11 @@ function addStudentToTable(student, index) {
     row.innerHTML = `
         <td>${student.name}</td>
         <td>${student.lastName}</td>
-        <td>${student.grade}</td>`;
+        <td>${student.grade}</td>
+        <td>
+            <button onclick="editStudent(${index})">Editar</button>
+            <button onclick="deleteStudent(${index})">Eliminar</button>
+        </td>`;
     tableBody.appendChild(row);
 }
 
@@ -175,3 +179,11 @@ document.getElementById("studentForm").addEventListener("submit", function (e) {
     blurOnLastName();
     blurOnGrade();
 });
+
+function deleteStudent(index) {
+    students.splice(index, 1);
+    tableBody.innerHTML = "";
+    students.forEach((s, i) => addStudentToTable(s, i));
+    calcularPromedio();
+}
+
